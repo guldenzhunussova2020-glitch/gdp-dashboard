@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#122b35">
+<title>МағынаLab AI — 6-сынып | Мәтіннен мағынаға</title>
+<style>
+:root{--ink:#13303d;--ink2:#39505c;--green:#168c75;--green2:#dff6eb;--blue:#27628d;--gold:#eab86e;--paper:#f8f7f2;--line:#dfe7e5;--muted:#6b7880;--shadow:0 18px 50px rgba(12,47,53,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;font-size:15px;line-height:1.55}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.4}.hidden{display:none!important}
+.wrap{width:min(1300px,calc(100% - 44px));margin:0 auto}
+.header{background:#102d36;color:#fff;position:relative;overflow:hidden;isolation:isolate}
+.header:before{content:"";position:absolute;width:490px;height:490px;border:80px solid rgba(234,184,110,.08);border-radius:50%;right:-140px;top:-320px;z-index:-1}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 0;gap:18px;border-bottom:1px solid rgba(255,255,255,.15)}
+.logo{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:850;letter-spacing:-.7px}.seal{display:grid;place-items:center;width:42px;height:42px;background:linear-gradient(150deg,#fae2a7,#c69850);color:#183943;border-radius:12px;font-family:Georgia,serif;font-weight:900;font-size:25px}
+.logo small{display:block;font-size:9px;letter-spacing:1.65px;color:#a6d5ce;font-weight:700;line-height:1}.navRight{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{font-size:12px;font-weight:750;color:#dceceb;border:1px solid #40616a;border-radius:80px;padding:7px 12px;white-space:nowrap}
+.navbtn{border:1px solid #55717a;color:#fff;padding:9px 13px;background:transparent;border-radius:10px;font-size:13px;font-weight:720}.navbtn.active,.navbtn:hover{background:#fff;color:#102d36}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:35px;padding:43px 0 49px}
+.eyebrow{color:#efc987;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2.5px}
+.hero h1{font-size:clamp(31px,4.2vw,57px);line-height:1.08;letter-spacing:-1.8px;margin:13px 0 16px;max-width:800px}.hero h1 em{color:#eec88b;font-style:normal}
+.hero p{font-size:16px;max-width:770px;color:#bdd3d6;margin:0}
+.heroArt{width:194px;height:194px;flex:none;border:1px solid #5e7b80;border-radius:50%;display:grid;place-items:center;position:relative;background:radial-gradient(circle,#224954 0,#102d36 70%);box-shadow:0 0 0 12px #1b3f49,0 0 0 13px #42606a}
+.heroArt:before{content:"✦";position:absolute;font-size:29px;top:7px;right:19px;color:#eec88b}
+.heroArt svg{width:128px}.chip{padding:5px 10px;background:#234d55;color:#d4f3ec;border:1px solid #3d6f74;border-radius:7px;font-size:11px;font-weight:750}
+.heroChips{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+main{padding:28px 0 60px}
+.workspace{display:grid;grid-template-columns:220px minmax(0,1fr) 275px;align-items:start;gap:18px}
+.panel{border:1px solid var(--line);background:#fff;border-radius:18px;box-shadow:0 6px 24px rgba(15,43,49,.03);overflow:hidden}
+.panelBody{padding:20px}
+.sideTitle{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#89989b;font-weight:850;margin:0 0 12px}
+.station{display:flex;align-items:center;text-align:left;gap:11px;width:100%;padding:13px 11px;margin:6px 0;border-radius:11px;background:transparent;border:1px solid transparent;color:#304b54;font-weight:760;font-size:14px}
+.station:hover{background:#f5f8f5}.station.active{background:#e9f6ef;border-color:#b7ded2;color:#075d4a}
+.bubble{display:grid;place-items:center;width:33px;height:33px;border-radius:10px;background:#eef1f1;flex:none;font-size:12px}
+.station.active .bubble{background:#c9ebdd}.station small{display:block;color:#7d9196;font-weight:570;font-size:11px}
+.progressBar{height:9px;background:#e7efed;border-radius:12px;overflow:hidden}.progressBar span{height:100%;display:block;background:linear-gradient(90deg,#13a283,#e3bb6e);transition:width .25s}
+.statRow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;color:#6e7d81}.statRow strong{color:#0c6654;font-size:17px}
+.cardHeader{border-bottom:1px solid var(--line);padding:17px 23px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.h2{font-size:21px;letter-spacing:-.5px;margin:0;line-height:1.25}
+.sub{font-size:13px;color:var(--muted)}
+.tag{font-size:11px;letter-spacing:.6px;border-radius:7px;padding:5px 9px;color:#0c7961;background:#e3f7ef;font-weight:800;white-space:nowrap}
+.lesson{padding:23px}.lesson h3{font-size:18px;margin:0 0 10px}.lesson p{margin:0 0 12px}.lessonText{font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.9;color:#253f48}.lessonText p{border-left:3px solid #e1c184;padding:0 0 0 14px;margin:0 0 15px}
+.lessonText strong{color:#0a6e5a}.fine{font-size:12px;color:#76898e}
+.action{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;border:1px solid transparent;border-radius:10px;background:#117d68;color:#fff;font-weight:800;font-size:13px;text-align:center;transition:transform .12s,background .12s}
+.action:hover{background:#095a4b;transform:translateY(-1px)}.action.secondary{background:#eef5f2;color:#155a4f;border-color:#ccded9}.action.secondary:hover{background:#dcece5}.action.outline{background:#fff;color:#285061;border-color:#ccdcdd}.action.outline:hover{background:#e9f0f1}.action.gold{background:#efc379;color:#243741}.action.gold:hover{background:#f2d19c}
+.action.sm{padding:7px 10px;font-size:12px}.actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.exerciseMeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.question{font-size:23px;font-weight:830;line-height:1.35;letter-spacing:-.55px;margin:6px 0 12px}.instruction{color:#677d82;font-size:13px;margin-bottom:19px}
+.options{display:grid;gap:9px}.opt{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid #dbe6e6;border-radius:11px;cursor:pointer;background:#fff;text-align:left;transition:.15s;min-height:49px}
+.opt:hover{border-color:#8ac8b8;background:#f6fbf8}.opt.chosen{border-color:#279c7e;background:#ebf9f2;box-shadow:inset 4px 0 #168c75}
+.opt input{accent-color:#15846d;width:17px;height:17px;margin:0;flex:none}
+.taskBox{border:1px solid #e2e9e5;background:#fcfdfb;border-radius:14px;padding:15px;margin-top:10px}
+.lineItem{display:flex;align-items:center;justify-content:space-between;gap:13px;padding:12px 0;border-bottom:1px solid #e6eeee}.lineItem:last-child{border-bottom:0}
+.lineItem > div:first-child{flex:1}.lineItem select{border:1px solid #cbdad7;background:white;border-radius:9px;padding:10px;min-width:145px;max-width:55%;color:#1e4147}
+.seqItem{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:12px 14px;background:#fff;border:1px solid #d9e7e2;border-radius:10px;margin:8px 0}
+.seqItem .index{font-size:13px;font-weight:850;color:#14735b;flex:none}.seqItem span.text{flex:1}
+.seqBtns{display:flex;gap:4px}.seqBtns button{background:#edf5f2;border:1px solid #d6e7df;border-radius:7px;width:32px;height:32px;color:#296252}
+textarea,.textInput{width:100%;padding:14px;border:1px solid #cbdcdd;background:#fff;color:#223c43;border-radius:12px;outline:0}
+textarea:focus,.textInput:focus{border-color:#279c7e;box-shadow:0 0 0 3px #ddf4ec}textarea{min-height:145px;resize:vertical}
+.taskFooter{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;padding:20px 23px;border-top:1px solid var(--line);background:#fbfcfa}
+.note{background:#f3f8f4;border-left:3px solid #188d75;padding:11px 14px;border-radius:0 9px 9px 0;color:#365659;font-size:13px}
+.feedback{padding:17px 18px;border-radius:13px;margin-top:21px;background:#f6f7f3;border:1px solid #dce7df}
+.feedback.ok{background:#eaf8f1;border-color:#afe4cf}.feedback.warn{background:#fff9ea;border-color:#f0dcab}
+.feedback strong{display:block;margin-bottom:5px}.feedback p{margin:7px 0 0;color:#4c686e;font-size:14px}
+.scoreBig{font-size:48px;font-weight:900;letter-spacing:-2px;color:#0e715b;line-height:1.2}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.metric{background:#f2f7f4;border-radius:12px;padding:15px}.metric b{display:block;font-size:24px;color:#176f5d}.metric small{font-size:11px;color:#5e787b}
+.teacherPanel{display:grid;grid-template-columns:1fr 1fr;gap:14px}.teacherTile{background:#fbfcfa;border:1px solid #dbe8e5;border-radius:14px;padding:18px}.teacherTile h3{margin:0 0 5px}.teacherTile p{font-size:13px;color:#667b80;min-height:57px}
+.badges{display:flex;flex-wrap:wrap;gap:5px}.badge{padding:5px 8px;background:#edf5f2;border-radius:6px;font-size:11px;font-weight:760;color:#2a7161}
+.selfcheck{display:flex;align-items:center;gap:12px;padding:10px 0;font-size:14px}.selfcheck input{accent-color:#0d866b}
+.footerText{font-size:12px;color:#7f8a8d;margin-top:20px;line-height:1.7}
+.stickyText{position:sticky;top:16px}
+.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:11px;background:#163841;color:#fff;box-shadow:0 9px 40px #16384140;z-index:999;max-width:90%;font-size:13px;transition:.2s}
+#participantCard{background:linear-gradient(135deg,#e9f7f0,#fff);padding:17px;border-radius:13px;border:1px solid #cce7dc}
+.fieldLabel{font-size:12px;font-weight:800;color:#4a686e;display:block;margin-bottom:5px}
+.fieldInput{border:1px solid #c6d9d5;border-radius:8px;padding:9px 11px;width:100%;background:#fff;margin-bottom:10px}
+.flexBetween{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ornament{font-size:26px;color:#d9a959;font-family:Georgia,serif}
+a{color:#147f6a}
+@media(max-width:1100px){.workspace{grid-template-columns:195px minmax(0,1fr)}.workspace>.right{grid-column:2}.heroArt{width:145px;height:145px}.heroArt svg{width:105px}}
+@media(max-width:760px){.wrap{width:calc(100% - 28px)}.hero{padding:29px 0;gap:10px}.heroArt{display:none}.hero h1{font-size:33px;letter-spacing:-1px}.hero p{font-size:14px}.nav{align-items:flex-start}.logo{font-size:16px}.seal{width:36px;height:36px;font-size:21px}.pill{display:none}.workspace{display:flex;flex-direction:column}.workspace>.panel{width:100%}.sidebar .panelBody{padding:12px}.stations{display:flex;gap:7px;overflow-x:auto}.station{min-width:156px;margin:0;padding:9px}.station small{font-size:10px}.lesson{padding:17px}.cardHeader{padding:17px}.question{font-size:19px}.lineItem{align-items:flex-start;flex-direction:column}.lineItem select{width:100%;max-width:none}.teacherPanel{grid-template-columns:1fr}.teacherTile p{min-height:0}.stickyText{position:static}.navRight{justify-content:flex-end}.metrics{gap:5px}.metric{padding:10px}.metric b{font-size:21px}}
+@media print{.header,.sidebar,.right,.actions,.taskFooter,.navbtn,#participantCard{display:none!important}.workspace{display:block}.panel{border:0;box-shadow:none}.wrap{width:100%}main{padding:0}body{background:white;color:black;font-family:"Times New Roman",serif;font-size:14pt}.lessonText{font-size:14pt}}
+</style>
+</head>
+<body>
+<header class="header">
+ <div class="wrap">
+  <nav class="nav">
+    <div class="logo"><span class="seal">М</span><span>МағынаLab <span style="color:#ecc487">AI</span><small>ОҚУ САУАТТЫЛЫҒЫ ЗЕРТХАНАСЫ</small></span></div>
+    <div class="navRight"><span class="pill">6-СЫНЫП · ҚАЗАҚ ӘДЕБИЕТІ</span><button class="navbtn active" id="learnerTab">Қатысушы</button><button class="navbtn" id="teacherTab">Жүргізуші</button></div>
+  </nav>
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Интерактивті шеберлік сабақ</div>
+      <h1>Мәтіннен <em>мағынаға.</em><br>Оқудан — ойлауға.</h1>
+      <p>«Аяз би» ертегісінің желісімен жасалған 6-сынып мәтіні. 4 зертхана, 10 тапсырма, дәлелді пікір және цифрлық кері байланыс.</p>
+      <div class="heroChips"><span class="chip">Ақпаратты табу</span><span class="chip">Негізгі ой</span><span class="chip">Талдау</span><span class="chip">Дәлелдеу</span><span class="chip">Сыни бағалау</span></div>
+    </div>
+    <div class="heroArt"><svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 118Q80 75 140 118V127H20Z" fill="#dcb677"/><path d="M46 117V69L80 39L114 69V117" stroke="#eccb8c" stroke-width="5" stroke-linejoin="round"/><path d="M46 69H114M62 55V117M98 55V117M46 82L80 39L114 82M48 95H112M80 40V25" stroke="#9cd5c7" stroke-width="3"/><path d="M65 117V94C65 85 95 85 95 94V117" stroke="#eccb8c" stroke-width="4"/><circle cx="80" cy="23" r="8" fill="#eccb8c"/><path d="M24 133H137" stroke="#eccb8c" stroke-width="3"/></svg></div>
+  </div>
+ </div>
+</header>
+<main class="wrap">
+ <div class="workspace">
+  <aside class="panel sidebar">
+   <div class="panelBody">
+    <div id="participantCard">
+      <label class="fieldLabel" for="alias">Қатысушының есімі немесе бүркеншік аты</label>
+      <input id="alias" class="fieldInput" maxlength="40" placeholder="Мысалы, Зерде тобы" autocomplete="off">
+      <label class="fieldLabel" for="group">Тобыңыз</label>
+      <select id="group" class="fieldInput"><option value="Зерде">Зерде</option><option value="Талдау">Талдау</option><option value="Дәлел">Дәлел</option><option value="Парасат">Парасат</option></select>
+      <button class="action sm secondary" id="saveProfile" style="width:100%">Сақтау</button>
+    </div>
+    <div style="margin-top:24px">
+      <p class="sideTitle">Зерттеу бағыттары</p>
+      <div class="stations" id="stations"></div>
+    </div>
+    <div style="margin-top:23px">
+      <div class="statRow"><span>Орындалған тапсырмалар</span><strong id="doneCount">0/10</strong></div>
+      <div class="progressBar"><span id="overallProgress" style="width:0%"></span></div>
+      <p class="fine">Нәтижелер осы құрылғының браузерінде сақталады.</p>
+    </div>
+   </div>
+  </aside>
+  <section id="mainPanel" class="panel" aria-live="polite"></section>
+  <aside class="right">
+   <div class="panel stickyText">
+    <div class="cardHeader"><div><h2 class="h2" style="font-size:18px">Оқу мәтіні</h2><div class="sub">«Аяз би» ертегісінің желісі бойынша</div></div><span class="tag">6-сынып</span></div>
+    <div class="panelBody">
+     <button class="action secondary sm" id="toggleText" style="width:100%">Мәтінді ашу / жабу</button>
+     <div id="readText" style="margin-top:15px"></div>
+     <p class="fine">Оқу құралы үшін бейімделген авторлық мазмұндама. Ертегінің сөзбе-сөз түпнұсқасы емес.</p>
+    </div>
+   </div>
+  </aside>
+ </div>
+ <p class="footerText">МағынаLab AI · Шеберлік сабаққа арналған ашық демонстрациялық нұсқа. Автоматты тексеру алдын ала құрастырылған жауап кілтімен жұмыс істейді. Шынайы генеративті ЖИ функциясы ChatGPT-ке дайын сұраныс көшіру арқылы қолданылады; платформаның өзінде ЖИ моделі орнатылмаған. Есім мен жауаптар серверге жіберілмейді.</p>
+</main>
+<div class="toast hidden" id="toast"></div>
+<script>
+(()=>{"use strict";
+const STORY=[
+"Ертеде Мадан хан қырық уәзіріне ерекше тапсырма беріпті. Олар дүниедегі ең жаман адамды, құсты және шөпті тауып әкелуі керек екен. Уәзірлер ұзақ ізденіп, тікенді шеңгелді шөптің жаманы, ал қырғауылды құстың жаманы деп шешіпті. Бір күні олар таудың етегінде қой бағып жүрген, үстіне ескі тон киген Жаман есімді адамды кездестіреді. Оның сыртқы келбетіне қарап, ең жаман адам осы болар деп ойлайды.",
+"Жаман уәзірлердің тапсырмасын естіп, олармен бірге ханға баруға келіседі. Жолда ол уәзірлер таңдаған шөп пен құс туралы өз ойын айтады. Жаман шеңгелдің тікенді болғанымен, отын ретінде пайдаға жарайтынын түсіндіреді. Ал қырғауылды тек сыртқы көрінісіне қарап жаман санауды дұрыс деп есептемейді. Ол шөптің жаманы ретінде қарақоғаны, құстың жаманы ретінде сауысқанды ұсынады.",
+"Хан Жаманның пікірін естігенде, оның мұндай қорытындыға қалай келгенін сұрайды. Жаман өз тәжірибесінен мысал келтіріп, таңдауын дәлелдейді. Хан оның сыртқы келбеті қарапайым болғанымен, байқағыш әрі тапқыр адам екенін аңғарады. Кейін Жаман өз ақылын басқа да сынақтарда көрсетеді.",
+"Бұл оқиға адамды сыртқы келбетіне қарап бағалаудың қате болуы мүмкін екенін көрсетеді. Адамның шынайы қасиеті оның ақылынан, іс-әрекетінен және айтқан ойын дәлелдей алуынан танылады."
+];
+const STATIONS=[
+{id:0,title:"Болжам",small:"Оқылымға дайындық",count:"2 тапсырма"},
+{id:1,title:"Дерек",small:"Түсіну және іріктеу",count:"3 тапсырма"},
+{id:2,title:"Мағына",small:"Талдау және дәлел",count:"3 тапсырма"},
+{id:3,title:"Парасат",small:"Сыни бағалау",count:"2 тапсырма"}
+];
+const TASKS=[
+{id:1,station:0,type:"single",pts:1,skill:"Болжау",title:"Үш белгі — бір болжам",hint:"«Ескі тон», «қойшы», «қырық уәзір» тірек сөздерін оқып, оқиға туралы болжам жасаңыз. Болжамның жалғыз дұрыс жауабы болмайды.",options:["Сыртқы келбет пен ақылды салыстыратын оқиға","Егін өсіру жолдары туралы оқиға","Құстарды қорғауға арналған ғылыми мәтін"],correct:0,participation:true,explain:"Бұл тапсырма жауапты табудан бұрын мәтінге қатысты болжам құруға арналған. Өз болжамыңызды кейін мәтінмен салыстырыңыз."},
+{id:2,station:0,type:"multi",pts:2,skill:"Ақпаратты табу",title:"Мәтіндегі үш нақты деректі табыңыз",hint:"Мәтінге сәйкес келетін барлық тұжырымды белгілеңіз.",options:["Мадан хан уәзірлеріне тапсырма берді.","Жаман ел басқарушысы болып дүниеге келді.","Уәзірлер Жаманды таудың етегінде кездестірді.","Жаман шеңгелдің отын болатынын түсіндірді.","Хан бірден уәзірлерді жазалады."],correct:[0,2,3],explain:"Мәтіндегі 1 және 2-абзацтарда ханның тапсырмасы, кездесу орны және шеңгелдің пайдасы көрсетілген."},
+{id:3,station:1,type:"tf",pts:3,skill:"Ақпаратты тексеру",title:"«Дұрыс па, бұрыс па?»",hint:"Әр тұжырымға мәтін бойынша баға беріңіз.",rows:[["Уәзірлер Жаманның киіміне қарап қорытынды жасады.",true],["Хан Жаманның дәлелін тыңдаудан бас тартты.",false],["Жаман өз пікірін өмірлік тәжірибесі арқылы дәлелдеді.",true]],explain:"Кейіпкер туралы баға бермес бұрын нақты мәтіндік дәлелді қарау қажет."},
+{id:4,station:1,type:"order",pts:3,skill:"Оқиғалар реттілігі",title:"Оқиғаны дұрыс ретке келтіріңіз",hint:"↑ және ↓ батырмалары арқылы оқиғаларды мәтіндегі тәртіппен орналастырыңыз.",rows:["Хан қырық уәзіріне тапсырма береді.","Уәзірлер қойшы Жаманды кездестіреді.","Жаман таңдалған шөп пен құсқа қатысты пікірін түсіндіреді.","Хан Жаманның тапқырлығын байқайды."],explain:"Оқиға: тапсырма → кездесу → дәлел → ханның бағасы."},
+{id:5,station:1,type:"match",pts:3,skill:"Сәйкестендіру",title:"Кейіпкер және оның әрекеті",hint:"Әр кейіпкерге сәйкес әрекетті таңдаңыз.",rows:["Мадан хан","Қырық уәзір","Жаман"],options:["Сыртқы көрініске қарап алғашқы шешім шығарды","Өз ойын тәжірибемен дәлелдеді","Ерекше тапсырма берді"],correct:[2,0,1],explain:"Хан — тапсырма, уәзірлер — сыртқы белгі, Жаман — дәлел."},
+{id:6,station:2,type:"single",pts:2,skill:"Негізгі ой",title:"Мәтіннің негізгі ойын анықтаңыз",hint:"Мәтіннің барлық бөлігін байланыстыратын тұжырымды таңдаңыз.",options:["Тек бай адам ел басқара алады.","Адамды киіміне емес, ақылы мен ісіне қарап бағалау керек.","Шеңгел барлық өсімдіктен пайдалы.","Басқаның пікірі үнемі қате болады."],correct:1,explain:"Соңғы абзац оқиғаның негізгі идеясын жинақтайды."},
+{id:7,station:2,type:"match",pts:2,skill:"Себеп-салдар",title:"Себеп пен салдарды байланыстырыңыз",hint:"Екі себептің салдарын табыңыз.",rows:["Уәзірлер Жаманның ескі киімін көрді.","Жаман пікірін дәлелдермен түсіндірді."],options:["Хан оның тапқырлығын байқады.","Уәзірлер оны ең жаман адам болуы мүмкін деп ойлады."],correct:[1,0],explain:"Сыртқы белгіге негізделген шешім мен дәлел арқылы өзгерген баға салыстырылады."},
+{id:8,station:2,type:"single",pts:2,skill:"Мәтіннен дәлел",title:"Қай сөйлем негізгі ойды дәлелдейді?",hint:"Дәлел мен жай ақпараттың айырмашылығын ескеріңіз.",options:["Уәзірлер ұзақ ізденді.","Жаман тәжірибесінен мысал келтіріп, таңдауын дәлелдеді.","Мадан хан қырық уәзіріне тапсырма берді.","Оқиға ертеде болған."],correct:1,explain:"Бұл сөйлем Жаманның ақылы әрекет пен дәйек арқылы танылатынын дәлелдейді."},
+{id:9,station:3,type:"multi",pts:3,skill:"ЖИ қатесін тексеру",title:"Жасанды интеллекттің қатесін табыңыз",hint:"Төмендегі бес тұжырымның мәтінге қайшы келетін үшеуін белгілеңіз. Бұл — әдейі қате енгізілген оқу үлгісі, нақты ЖИ жауабы емес.",options:["Хан уәзірлеріне тапсырма берді.","Уәзірлер Жаманды оның сәнді киіміне қарап таңдады.","Жаман шеңгелдің отынға жарайтынын айтты.","Жаман ханға сыйлық беріп, ақылды екенін дәлелдеді.","Мәтіннің түйіні: бай адам ғана ақылды болады."],correct:[1,3,4],explain:"Қате тұжырымдар: сәнді киім, сыйлық беру, байлыққа негізделген түйін. Дұрысы: Жаман қарапайым киінген және пікірін дәлелдеп, ақылын көрсетті."},
+{id:10,station:3,type:"essay",pts:3,skill:"Дәлелді пікір",title:"«Адамды сырт келбетіне қарап бағалауға бола ма?»",hint:"6-сынып оқушысы сияқты 4–5 сөйлеммен өз ойыңызды жазыңыз. ПОПС үлгісін қолданыңыз: пікір → себебі → мәтіннен мысал → қорытынды.",explain:"Бұл шығармашылық жауап автоматты түрде дұрыс/бұрыс деп бағаланбайды. Өзін-өзі бағалау және мұғалімнің кері байланысы қажет."}
+];
+const MAX=TASKS.reduce((s,t)=>s+t.pts,0);const STORE="magynalab-v1";
+const $=s=>document.querySelector(s);
+const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const stored=(()=>{try{return JSON.parse(localStorage.getItem(STORE)||"{}")}catch{return {}}})();
+let state={alias:stored.alias||"",group:stored.group||"Зерде",answers:stored.answers||{},checked:stored.checked||{},station:0,current:0,mode:"learner",textOpen:false};
+const save=()=>{try{localStorage.setItem(STORE,JSON.stringify({alias:state.alias,group:state.group,answers:state.answers,checked:state.checked}))}catch{}};
+const getAns=t=>state.answers[t.id]??(t.type==="order"?[2,0,3,1]:t.type==="multi"?[]:t.type==="tf"||t.type==="match"?[]:t.type==="essay"?{text:"",criteria:[]}:null);
+const getPts=t=>{
+ if(!state.checked[t.id])return null;
+ const a=getAns(t);
+ if(t.type==="essay")return Math.min(t.pts,(a.criteria||[]).length); 
+ if(t.type==="single")return t.participation?1:a===t.correct?t.pts:0;
+ if(t.type==="multi"){const correct=new Set(t.correct);const good=(a||[]).filter(i=>correct.has(i)).length;const bad=(a||[]).filter(i=>!correct.has(i)).length;return Math.max(0,Math.round(t.pts*Math.max(0,good-bad)/correct.size))}
+ if(t.type==="tf")return t.rows.reduce((s,r,i)=>s+(a[i]===r[1]?1:0),0);
+ if(t.type==="order"){const n=a.filter((v,i)=>v===i).length;return Math.round(t.pts*n/t.rows.length)}
+ if(t.type==="match")return t.rows.reduce((s,r,i)=>s+(a[i]===t.correct[i]?1:0),0);
+ return 0
+};
+const status=()=>({done:TASKS.filter(t=>state.checked[t.id]).length,score:TASKS.reduce((s,t)=>s+(getPts(t)||0),0)});
+function notify(msg){const e=$("#toast");e.textContent=msg;e.classList.remove("hidden");clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>e.classList.add("hidden"),3200)}
+function renderSidebar(){const {done}=status();$("#doneCount").textContent=done+"/10";$("#overallProgress").style.width=(done/10*100)+"%";$("#stations").innerHTML=STATIONS.map((s,i)=>`<button class="station ${i===state.station&&state.mode==="learner"?"active":""}" data-station="${i}"><span class="bubble">${i+1}</span><span>${s.title}<small>${s.small}</small></span></button>`).join("");document.querySelectorAll("[data-station]").forEach(b=>b.onclick=()=>{state.station=+b.dataset.station;state.current=TASKS.findIndex(t=>t.station===state.station);state.mode="learner";toggleRole();render()})}
+function renderText(){const el=$("#readText");el.classList.toggle("hidden",!state.textOpen);el.innerHTML=`<div class="lessonText">${STORY.map((p,i)=>`<p><strong>${i+1}.</strong> ${safe(p)}</p>`).join("")}</div>`}
+function setAnswer(t,v){state.answers[t.id]=v;delete state.checked[t.id];save();render()}
+function responseHtml(t){
+ const a=getAns(t);
+ if(t.type==="single"||t.type==="multi")return `<div class="options">${t.options.map((o,i)=>{const sel=t.type==="single"?a===i:a.includes(i);return `<label class="opt ${sel?"chosen":""}"><input type="${t.type==="single"?"radio":"checkbox"}" name="task${t.id}" data-opt="${i}" ${sel?"checked":""}><span>${safe(o)}</span></label>`}).join("")}</div>`;
+ if(t.type==="tf")return `<div class="taskBox">${t.rows.map((r,i)=>`<div class="lineItem"><div>${safe(r[0])}</div><select data-row="${i}"><option value="">Таңдаңыз</option><option value="true" ${a[i]===true?"selected":""}>Дұрыс</option><option value="false" ${a[i]===false?"selected":""}>Бұрыс</option></select></div>`).join("")}</div>`;
+ if(t.type==="order")return `<div class="taskBox">${a.map((v,i)=>`<div class="seqItem"><b class="index">${i+1}</b><span class="text">${safe(t.rows[v])}</span><div class="seqBtns"><button data-move="${i}" data-dir="-1" aria-label="Жоғары жылжыту" ${i===0?"disabled":""}>↑</button><button data-move="${i}" data-dir="1" aria-label="Төмен жылжыту" ${i===a.length-1?"disabled":""}>↓</button></div></div>`).join("")}</div>`;
+ if(t.type==="match")return `<div class="taskBox">${t.rows.map((r,i)=>`<div class="lineItem"><div>${safe(r)}</div><select data-row="${i}"><option value="">Сәйкесін таңдаңыз</option>${t.options.map((o,j)=>`<option value="${j}" ${a[i]===j?"selected":""}>${safe(o)}</option>`).join("")}</select></div>`).join("")}</div>`;
+ if(t.type==="essay")return `<div class="note">Менің ойымша, ... Себебі ... Мысалы, мәтінде ... Сондықтан ...</div><div style="margin-top:13px"><textarea id="essayText" placeholder="Өз пікіріңізді осы жерге жазыңыз...">${safe(a.text)}</textarea></div><p class="sub"><span id="textLen">${a.text.length}</span> таңба. Кемінде 60 таңба ұсынылады.</p><div class="taskBox"><strong style="font-size:14px">Өзін-өзі бағалау (дескриптор)</strong>${["Өз пікірімді нақты білдірдім.","Мәтіндегі оқиғадан дәлел келтірдім.","Себеп пен қорытындыны байланыстырдым."].map((v,i)=>`<label class="selfcheck"><input type="checkbox" data-criterion="${i}" ${(a.criteria||[]).includes(i)?"checked":""}>${v}</label>`).join("")}</div>`;
+ return ""
+}
+function renderQuestion(){
+ const t=TASKS[state.current],ans=getAns(t),pts=getPts(t);
+ $("#mainPanel").innerHTML=`<div class="cardHeader"><div><h2 class="h2">${safe(STATIONS[t.station].title)} зертханасы</h2><div class="sub">Тапсырма ${t.id} / 10 · ${safe(t.skill)}</div></div><span class="tag">${t.pts} балл</span></div>
+ <div class="lesson"><div class="exerciseMeta"><span class="badge">6-сынып</span><span class="badge">${safe(t.skill)}</span><span class="badge">${t.station+1}-зертхана</span></div><div class="question">${safe(t.title)}</div><p class="instruction">${safe(t.hint)}</p>${responseHtml(t)}
+ ${pts!==null?`<div class="feedback ${pts===t.pts?"ok":"warn"}"><strong>${t.type==="essay"?"Өзін-өзі бағалау":pts===t.pts?"Жарайсыз!":"Тексеру аяқталды"} · ${pts} / ${t.pts} балл</strong><p>${safe(t.explain)}</p>${t.type!=="essay"&&pts<t.pts?`<p>Мәтінге қайта оралып, дұрыс жауаптың себебін анықтаңыз.</p>`:""}</div>`:""}</div>
+ <div class="taskFooter"><span class="sub">Мағынаны түсіну — өз жауабыңды дәлелдей алу.</span><div class="actions"><button class="action outline" id="prevQ" ${state.current===0?"disabled":""}>← Алдыңғы</button><button class="action secondary" id="checkQ">${state.checked[t.id]?"Қайта тексеру":"Жауапты тексеру"}</button><button class="action" id="nextQ">${state.current===9?"Нәтижені көру →":"Келесі →"}</button></div></div>`;
+ document.querySelectorAll("[data-opt]").forEach(el=>el.onchange=()=>{const i=+el.dataset.opt;if(t.type==="single")setAnswer(t,i);else{const a=[...getAns(t)];const at=a.indexOf(i);if(at>=0)a.splice(at,1);else a.push(i);setAnswer(t,a)}});
+ document.querySelectorAll("[data-row]").forEach(el=>el.onchange=()=>{const a=[...getAns(t)];a[+el.dataset.row]=el.value===""?null:t.type==="tf"?el.value==="true":+el.value;setAnswer(t,a)});
+ document.querySelectorAll("[data-move]").forEach(el=>el.onclick=()=>{const a=[...getAns(t)],i=+el.dataset.move,j=i+(+el.dataset.dir);[a[i],a[j]]=[a[j],a[i]];setAnswer(t,a)});
+ const essay=$("#essayText");if(essay){essay.oninput=()=>{const x=getAns(t);x.text=essay.value;state.answers[t.id]=x;delete state.checked[t.id];$("#textLen").textContent=essay.value.length;save()};document.querySelectorAll("[data-criterion]").forEach(el=>el.onchange=()=>{const x=getAns(t),i=+el.dataset.criterion;let arr=[...(x.criteria||[])];arr=el.checked?[...arr.filter(v=>v!==i),i]:arr.filter(v=>v!==i);x.criteria=arr;state.answers[t.id]=x;delete state.checked[t.id];save()})}
+ $("#checkQ").onclick=()=>{const ans=getAns(t);const filled=t.type==="single"?ans!==null:t.type==="multi"?ans.length>0:t.type==="order"?true:t.type==="essay"?ans.text.trim().length>=35:t.type==="tf"||t.type==="match"?ans.length===t.rows.length&&ans.every(v=>v!==null&&v!==undefined):false;
+ if(!filled){notify(t.type==="essay"?"Кемінде 35 таңбадан тұратын жауап жазыңыз.":"Алдымен барлық жауаптарды белгілеңіз.");return}state.checked[t.id]=true;save();render()};
+ $("#prevQ").onclick=()=>{state.current--;state.station=TASKS[state.current].station;render()};$("#nextQ").onclick=()=>{if(state.current>=9)renderResults();else{state.current++;state.station=TASKS[state.current].station;render()}};
+}
+function renderResults(){
+ const {done,score}=status();state.mode="result";toggleRole();renderSidebar();
+ const percent=Math.round(score/MAX*100);
+ const rows=TASKS.map(t=>`<tr><td style="padding:9px;border-bottom:1px solid #e3e9e6">${t.id}. ${safe(t.skill)}</td><td style="padding:9px;text-align:right;border-bottom:1px solid #e3e9e6;font-weight:700">${getPts(t)===null?"—":getPts(t)} / ${t.pts}</td></tr>`).join("");
+ $("#mainPanel").innerHTML=`<div class="cardHeader"><div><h2 class="h2">Менің нәтижем</h2><div class="sub">${safe(state.alias||"Қатысушы")} · ${safe(state.group)} тобы</div></div><span class="tag">Қорытынды</span></div><div class="lesson"><div class="scoreBig">${score} <span style="font-size:22px;color:#7c9693">/ ${MAX}</span></div><p class="sub">Тапсырмалар бойынша жинаған ұпайыңыз. Ашық жауаптағы ұпай — өзін-өзі бағалау.</p><div class="metrics"><div class="metric"><b>${done}/10</b><small>орындалған</small></div><div class="metric"><b>${percent}%</b><small>жалпы ұпай</small></div><div class="metric"><b>${10-done}</b><small>аяқталмаған</small></div></div><table style="border-collapse:collapse;width:100%;margin:10px 0 22px">${rows}</table><div class="note">Нәтиже тек осы браузерде сақталады. Жетекшіге жіберу үшін «Нәтижені жүктеу» батырмасын қолданыңыз.</div><div class="actions" style="margin-top:18px"><button class="action" id="resume">Тапсырмаларға оралу</button><button class="action secondary" id="download">Нәтижені жүктеу (.csv)</button><button class="action outline" id="printResult">Басып шығару</button></div><p class="sideTitle" style="margin-top:29px">Рефлексия</p><div class="taskBox"><p>1. Мәтінге қайта қарауыма қандай тапсырма себеп болды?</p><p>2. ЖИ жасаған жауаптың дұрыстығын неге тексеру керек?</p><p>3. Ертеңгі сабағыма қай механиканы енгіземін?</p></div><div class="actions" style="margin-top:20px"><button class="action outline" id="resetAll">Нәтижені тазалау, қайта бастау</button></div></div>`;
+ $("#resume").onclick=()=>{state.mode="learner";toggleRole();render()};$("#download").onclick=download;$("#printResult").onclick=()=>window.print();
+ $("#resetAll").onclick=()=>{if(confirm("Барлық жауаптарды өшіруге келісесіз бе?")){state.answers={};state.checked={};state.current=0;state.station=0;save();state.mode="learner";toggleRole();render()}};
+}
+const FULLTEXT=STORY.map((p,i)=>`${i+1}-абзац. ${p}`).join("\n\n");
+const PROMPTS={
+ gen:(level,skill)=>`Сен 6-сынып қазақ әдебиетінің әдіскерісің. Төмендегі авторлық бейімделген мәтін бойынша ${skill} дағдысын дамытуға арналған ${level} деңгейіндегі 3 интерактивті тапсырма құрастыр. Тапсырмалар бір-біріне ұқсамасын (мысалы, сәйкестендіру, реттілік, дәлелді таңдау). Әр тапсырмаға: нұсқаулық, жауап кілті, дескриптор және неліктен осы дағдыны дамытатынын бер. Мәтінде жоқ деректі енгізбе. Барлық мазмұн 6-сынып жасына сай және қазақ тілінде болсын.\n\nМӘТІН:\n${FULLTEXT}`,
+ review:()=>`Сен 6-сынып қазақ әдебиеті мұғалімісің. Төмендегі «Аяз би» ертегісінің желісі бойынша бейімделген мәтінге сүйеніп, оқушының пікіріне ДАЙЫН ЖАУАП ЖАЗБАЙ, қалыптастырушы кері байланыс бер. 1) Пікір бар ма? 2) Мәтіннен нақты дәлел бар ма? 3) Себеп пен қорытынды байланысқан ба? Әр тармақты «бар/жетілдіру керек» деп бағала. 2 қысқа нақты кеңес бер. Ертегі туралы мәтінде жоқ дерек енгізбе.\n\nОҚУ МӘТІНІ:\n${FULLTEXT}\n\nОҚУШЫНЫҢ ЖАУАБЫ:\n${String(getAns(TASKS[9]).text||"").trim()||"[осы жерге жауапты енгізіңіз]"}`,
+ critique:()=>`Сен қазақ әдебиеті пәнінің әдістемелік сарапшысысың. 6-сынып оқушысына арнап тапсырма жаса: «Аяз би» желісімен берілген мәтіндегі 3 дұрыс және 3 әдейі бұрмаланған тұжырымды араластыр. Оқушының міндеті — бұрмаланған ақпаратты анықтап, дәлелін мәтіннен іздеу. Жауап кілтін бөлек, мұғалімге арналған бөлімге шығар. Жаңсақ тұжырымдарды шындық ретінде таныстырма.\n\n${FULLTEXT}`,
+ adapt:()=>`«Аяз би» желісі бойынша төмендегі мәтінге сүйен. 6-сыныпта оқу қарқыны әртүрлі үш оқушыға бір оқу мақсатын (негізгі ойды анықтап, дәлел келтіру) сақтап, үш күрделілік деңгейінде тапсырма құрастыр. Қолдауды (тірек сөздер, сөйлем бастауы, таңдаулар) деңгейге бейімде. Ешбір деңгейде ЖИ оқушының орнына толық жауап жазбасын. Әр нұсқаға 2 дескриптор қос.\n\n${FULLTEXT}`
+};
+async function copyText(t){try{await navigator.clipboard.writeText(t);notify("ЖИ сұранысы көшірілді. ChatGPT-ке қойыңыз.");return true}catch{const a=document.createElement("textarea");a.value=t;document.body.append(a);a.select();try{document.execCommand("copy");notify("Сұраныс көшірілді. ChatGPT-ке қойыңыз.");return true}catch{notify("Көшіру болмады: мәтінді қолмен белгілеңіз.");return false}finally{a.remove()}}}
+function renderTeacher(){
+ state.mode="teacher";toggleRole();renderSidebar();
+ $("#mainPanel").innerHTML=`<div class="cardHeader"><div><h2 class="h2">Жүргізушінің жұмыс кеңістігі</h2><div class="sub">Мұғалімдерге арналған 45 минуттық шеберлік сабақ</div></div><span class="tag">Демо + ЖИ</span></div>
+ <div class="lesson"><div class="note"><strong>Жұмыс логикасы:</strong> қатысушылар смартфоннан осы парақты ашады → 6-сынып мәтінін оқиды → төрт зертханада 10 тапсырманы орындайды → нәтижесін көреді → ЖИ-ге арналған тапсырма генерациясын сынайды.</div>
+ <div class="teacherPanel" style="margin-top:18px">
+ <div class="teacherTile"><h3>01 · Болжау</h3><p>«Үш белгі» әдісі, ақпаратты іздеу. №1–2 тапсырмалар.</p><div class="badges"><span class="badge">4 мин</span><span class="badge">Жеке</span></div></div>
+ <div class="teacherTile"><h3>02 · Дерек</h3><p>Дұрыс/бұрыс, оқиғалар реттілігі, кейіпкер мен әрекет. №3–5.</p><div class="badges"><span class="badge">6 мин</span><span class="badge">Жұп</span></div></div>
+ <div class="teacherTile"><h3>03 · Мағына</h3><p>Негізгі ой, себеп-салдар, дәлелді таңдау. №6–8.</p><div class="badges"><span class="badge">6 мин</span><span class="badge">Топ</span></div></div>
+ <div class="teacherTile"><h3>04 · Парасат</h3><p>ЖИ қатесін анықтау және дәлелді пікір. №9–10.</p><div class="badges"><span class="badge">7 мин</span><span class="badge">Жеке + талқылау</span></div></div>
+ </div>
+ <h3 style="font-size:23px;margin:32px 0 8px">ЖИ шеберханасы</h3>
+ <p class="sub">Жұмыс істейтін құралдар: дайын сұранысты көшіріңіз, ChatGPT ашыңыз, сұранысты қойып, нәтижесін сыныпқа сәйкестік бойынша сараптаңыз. Бұл бөлім сыртқы генеративті ЖИ қызметін қолданады, оның аккаунты мен интернет қажет болуы мүмкін.</p>
+ <div class="taskBox"><div class="flexBetween" style="align-items:flex-end;flex-wrap:wrap"><div style="flex:1;min-width:170px"><label class="fieldLabel" for="aiSkill">Оқу дағдысы</label><select id="aiSkill" class="fieldInput"><option value="мәтіннен ақпаратты табу">Ақпаратты табу</option><option value="негізгі ойды анықтау">Негізгі ой</option><option value="себеп-салдарды талдау">Талдау</option><option value="мәтіннен дәлел табу">Дәлелдеу</option><option value="жаңсақ ақпаратты бағалау">Сыни бағалау</option></select></div><div style="flex:1;min-width:160px"><label class="fieldLabel" for="aiLevel">Күрделілік</label><select id="aiLevel" class="fieldInput"><option value="қолдауы көп, бастапқы">Бастапқы</option><option value="орташа">Орташа</option><option value="күрделі">Күрделі</option></select></div></div><div class="actions"><button class="action" data-prompt="gen">ЖИ тапсырмасын құрастыру</button><button class="action secondary" data-prompt="adapt">Сараланған тапсырмалар</button></div></div>
+ <div class="teacherPanel" style="margin-top:15px"><div class="teacherTile"><h3>«ЖИ қатесін тап»</h3><p>3 шынайы және 3 әдейі бұрмаланған ақпарат арқылы сыни оқу тапсырмасын генерациялау.</p><button class="action outline sm" data-prompt="critique">ЖИ сұранысын дайындау</button></div><div class="teacherTile"><h3>Дәлелді пікірге кері байланыс</h3><p>№10 тапсырмадағы қатысушы жауабына дайын жауапсыз, дескриптор бойынша кері байланыс алу.</p><button class="action outline sm" data-prompt="review">Кері байланыс сұрау</button></div></div>
+ <h3 style="margin:30px 0 10px">Қатысушыларға кіру</h3><div class="taskBox"><p><strong>Сілтеме:</strong> <span id="linkText" style="overflow-wrap:anywhere">${safe(location.protocol.startsWith("http")?location.href:"Файл ашық сайтқа жарияланғаннан кейін пайда болады")}</span></p><div class="actions"><button class="action secondary sm" id="copyLink" ${location.protocol.startsWith("http")?"":"disabled"}>Сілтемені көшіру</button><button class="action outline sm" id="showHow">QR ұйымдастыру тәртібі</button></div><p class="fine">Сілтеме әр қатысушыға жеке нәтижені өз құрылғысында есептейді. Ортақ онлайн рейтинг немесе біріккен мұғалім кабинеті қарастырылмаған.</p></div></div>`;
+ document.querySelectorAll("[data-prompt]").forEach(el=>el.onclick=async()=>{const k=el.dataset.prompt,txt=k==="gen"?PROMPTS.gen($("#aiLevel").value,$("#aiSkill").value):PROMPTS[k]();await copyText(txt);window.open("https://chatgpt.com/","_blank","noopener,noreferrer")});
+ $("#copyLink").onclick=()=>copyText(location.href);$("#showHow").onclick=()=>notify("Файлды HTTPS сайтқа жариялаңыз; сол мекенжайды QR код генераторына енгізіңіз.");
+}
+function toggleRole(){$("#teacherTab").classList.toggle("active",state.mode==="teacher");$("#learnerTab").classList.toggle("active",state.mode!=="teacher")}
+function render(){if(state.mode==="teacher")return renderTeacher();if(state.mode==="result")return renderResults();state.station=TASKS[state.current].station;renderSidebar();renderQuestion();toggleRole()}
+function download(){const {done,score}=status();const data=[["Топ",state.group],["Қатысушы",state.alias||"Көрсетілмеген"],["Нәтиже",`${score}/${MAX}`],["Орындалған",`${done}/10`],["Тапсырма","Баллы"],...TASKS.map(t=>[t.title,`${getPts(t)??"—"}/${t.pts}`]),["Дәлелді пікір",getAns(TASKS[9]).text||""]];const csv="\ufeff"+data.map(r=>r.map(s=>'"'+String(s).replace(/"/g,'""')+'"').join(";")).join("\r\n");const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="magynalab_natizhe.csv";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+$("#alias").value=state.alias;$("#group").value=state.group;$("#saveProfile").onclick=()=>{state.alias=$("#alias").value.trim();state.group=$("#group").value;save();notify("Қатысушы деректері осы браузерде сақталды.")};
+$("#learnerTab").onclick=()=>{state.mode="learner";render()};$("#teacherTab").onclick=renderTeacher;$("#toggleText").onclick=()=>{state.textOpen=!state.textOpen;renderText()};
+state.textOpen=window.innerWidth>1050;renderText();render();
+})();
+</script>
+</body>
+</html>
